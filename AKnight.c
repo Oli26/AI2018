@@ -8,7 +8,9 @@
  
  
  
-////////// THIS SHOULD BE PriorityQueue.h 
+////////// THIS SHOULD BE PriorityQueue.h
+
+
 typedef struct PriorityQueue Queue;
 typedef struct Position Position;
 typedef struct Link Link;
@@ -31,11 +33,14 @@ struct Position{
 	int y;
 	int turn;
 };
+
+
 ////////////////////////////////////////////
 
 
 
 ////////// THIS SHOULD BE  PriorityQueue.c 
+
 Position* createPosition(int setX, int setY, int setTurn){
 	Position* position = malloc(sizeof(Position));
 	position->x = setX;
@@ -205,7 +210,6 @@ int usable(Queue* q, int testX, int testY, int turn){
 
 
 
-
 int actions[8][2] = {  /* knight moves */
   {-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1,-2}, {1,2}, {2, -1}, {2, 1}
 };
@@ -217,7 +221,30 @@ int isValidLocation(int x, int y) {
 }
 
 
+void attemptedEnqueue(Queue* openQueue, Queue* closedQueue, int newX, int newY, int nextTurn){
+	int result1 = contains(openQueue, newX, newY);
+	int result2 = contains(closedQueue, newX, newY);
 	
+	if(result1 == -1 && result2 == -1){
+		enqueue(openQueue, createPosition(newX, newY, nextTurn));
+	}else{
+		if(result1 != -1 && result2 != -1){
+			if(result2 > nextTurn && result1 > nextTurn){
+				enqueue(openQueue, createPosition(newX, newY, nextTurn));
+			}
+		}
+		if(result1 != -1){
+			if(result1 > nextTurn){
+				enqueue(openQueue, createPosition(newX, newY, nextTurn));
+			}
+		}
+		if(result2 != -1){
+			if(result2 > nextTurn){
+				enqueue(openQueue, createPosition(newX, newY, nextTurn));
+			}
+		}
+	}
+}	
 
 
 int knightA(int X, int Y, int finalX, int finalY, int h){
@@ -228,7 +255,6 @@ int knightA(int X, int Y, int finalX, int finalY, int h){
 	Queue* closedQueue = createPriorityQueue(limit,heuristicType, finalX, finalY);
 	 
 	
-	//Enqueue initial position
 	Position* initalPosition = createPosition(0,0,0);
 	enqueue(q,initalPosition);
 	
@@ -236,10 +262,9 @@ int knightA(int X, int Y, int finalX, int finalY, int h){
 	while(!isEmpty(q)){
 		statesVisited++;
 		Position* dequeuedPosition = dequeue(q);
+		enqueue(closedQueue, dequeuedPosition);
 		int nextTurn = dequeuedPosition->turn+1;
 		for(int i=0;i<8;i++){
-			
-			
 			int newX = dequeuedPosition->x + actions[i][0];
 			int newY = dequeuedPosition->y + actions[i][1];
 			
@@ -248,48 +273,14 @@ int knightA(int X, int Y, int finalX, int finalY, int h){
 						return nextTurn;
 			}
 			
-			enqueue(closedQueue, dequeuedPosition);
-			
-			
-			int result1 = contains(q, newX, newY);
-			int result2 = contains(closedQueue, newX, newY);
-			
-			if(result1 == -1 && result2 == -1){
-				if(isValidLocation(newX, newY)){
-					
-					enqueue(q, createPosition(newX, newY, nextTurn));
-					
-				}
-				
-			}else{
-				if(result1 != -1 && result2 != -1){
-					if(result1 > nextTurn && result2 > nextTurn && isValidLocation(newX, newY)){
-						enqueue(q, createPosition(newX, newY, nextTurn));
-					}
-					
-				}
-				if(result1 != -1){
-					if(result1 > nextTurn && isValidLocation(newX, newY)){
-						enqueue(q, createPosition(newX, newY, nextTurn));
-					}
-					
-				}
-				if(result2 != -1){
-					if(result2 > nextTurn && isValidLocation(newX, newY)){
-						enqueue(q, createPosition(newX, newY, nextTurn));
-					}
-				}
+			if(isValidLocation(newX, newY)){
+				attemptedEnqueue(q, closedQueue, newX, newY, nextTurn);
 			}
-			
-			
-			
 		}
 	}
 }
 
 int main(int argc, char *argv[]) {
-	sqrt(25);
-	
 	int x0,y0, x1,y1;
 	do {
 		printf("Start location (x,y) = "); fflush(stdout);
