@@ -73,9 +73,7 @@ int isEmpty(Queue* q){
 }
 
 int valuePosition(int heuristic, Position* p, int fX, int fY){
-	
-	/// OUR F is the turn of the position;
-	
+		
 	int xDiff;
 	if(p->x > fX){
 		xDiff = p->x-fX;
@@ -116,9 +114,6 @@ void enqueue(Queue* q, Position* p){
 	if(isFull(q) == 0){
 		
 		int valueNew = valuePosition(q->heuristic, p, q->finalX, q->finalY);
-		
-		
-		
 		
 		
 		printf("Enqueuing position (%d,%d) with turn = %d\n", p->x, p->y, p->turn);
@@ -248,15 +243,44 @@ int knightA(int X, int Y, int finalX, int finalY, int h){
 			int newX = dequeuedPosition->x + actions[i][0];
 			int newY = dequeuedPosition->y + actions[i][1];
 			
-			//  && (usable(closedQueue, newX, newY, nextTurn) || usable(q, newX, newY, nextTurn))
-			if(isValidLocation(newX, newY)){
-				if(newX == finalX && newY == finalY){
-					printf("FOUND! (%d,%d)\n", newX, newY);
-					return nextTurn;
-				}
-				enqueue(q, createPosition(newX, newY, nextTurn));
-				enqueue(closedQueue, dequeuedPosition);
+			if(newX == finalX && newY == finalY){
+						printf("FOUND! (%d,%d)\n", newX, newY);
+						return nextTurn;
 			}
+			
+			enqueue(closedQueue, dequeuedPosition);
+			
+			
+			int result1 = contains(q, newX, newY);
+			int result2 = contains(closedQueue, newX, newY);
+			
+			if(result1 == -1 && result2 == -1){
+				if(isValidLocation(newX, newY)){
+					
+					enqueue(q, createPosition(newX, newY, nextTurn));
+					
+				}
+				
+			}else{
+				if(result1 != -1 && result2 != -1){
+					if(result1 > nextTurn && result2 > nextTurn && isValidLocation(newX, newY)){
+						enqueue(q, createPosition(newX, newY, nextTurn));
+					}
+					
+				}
+				if(result1 != -1){
+					if(result1 > nextTurn && isValidLocation(newX, newY)){
+						enqueue(q, createPosition(newX, newY, nextTurn));
+					}
+					
+				}
+				if(result2 != -1){
+					if(result2 > nextTurn && isValidLocation(newX, newY)){
+						enqueue(q, createPosition(newX, newY, nextTurn));
+					}
+				}
+			}
+			
 			
 			
 		}
