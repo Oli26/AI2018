@@ -209,21 +209,25 @@ void attemptedEnqueue(Queue* openQueue, Queue* closedQueue, int newX, int newY, 
 	
 	if(result1 == -1 && result2 == -1){
 		enqueue(openQueue, createPosition(newX, newY, nextTurn));
+		statesVisited++;
 	}else{
 		if(result1 != -1 && result2 != -1){
 			if(result2 > nextTurn && result1 > nextTurn){
 				enqueue(openQueue, createPosition(newX, newY, nextTurn));
+				statesVisited++;
 				printQueue(openQueue);
 			}
 		}
 		if(result1 != -1){
 			if(result1 > nextTurn){
 				enqueue(openQueue, createPosition(newX, newY, nextTurn));
+				statesVisited++;
 			}
 		}
 		if(result2 != -1){
 			if(result2 > nextTurn){
 				enqueue(openQueue, createPosition(newX, newY, nextTurn));
+				statesVisited++;
 			}
 		}
 	}
@@ -232,7 +236,7 @@ void attemptedEnqueue(Queue* openQueue, Queue* closedQueue, int newX, int newY, 
 
 int knightA(int X, int Y, int finalX, int finalY, int h){
 
-	int limit = 10000;
+	int limit = 100000;
 	int heuristicType = h;
 	Queue* q = createPriorityQueue(limit,heuristicType,finalX,finalY);
 	Queue* closedQueue = createPriorityQueue(limit,heuristicType, finalX, finalY);
@@ -243,7 +247,7 @@ int knightA(int X, int Y, int finalX, int finalY, int h){
 	
 	
 	while(!isEmpty(q)){
-		statesVisited++;
+
 		Position* dequeuedPosition = dequeue(q);
 		enqueue(closedQueue, dequeuedPosition);
 		int nextTurn = dequeuedPosition->turn+1;
