@@ -187,20 +187,6 @@ int contains(Queue* q, int testX, int testY){
 	
 }
 
-
-int usable(Queue* q, int testX, int testY, int turn){
-	int value = contains(q, testX, testY);
-	if(value == -1){
-		return 1;
-	}else{
-		if(turn < value){
-			return 1;
-		}else{
-			return 0;
-		}
-	}
-}
-
 //////////////////////////////////////////////////////////////
 
 
@@ -272,6 +258,8 @@ int knightA(int X, int Y, int finalX, int finalY, int h){
 			
 			if(isValidLocation(newX, newY)){
 				attemptedEnqueue(q, closedQueue, newX, newY, nextTurn);
+				//printQueue(q);
+				//printf("\n\n");
 			}
 			
 			
