@@ -95,10 +95,7 @@ int valuePosition(int heuristic, Position* p, int fX, int fY){
 	
 	if(heuristic == 1){
 	
-		
-		float squaredDistance = (xDiff*xDiff) + (yDiff*yDiff);
-		double absDistance = sqrt(squaredDistance);
-		return 	absDistance/sqrt(5.0) + p->turn;
+		return 	xDiff + yDiff;
 		
 		
 	}else if(heuristic == 2){
@@ -109,7 +106,6 @@ int valuePosition(int heuristic, Position* p, int fX, int fY){
 
 void enqueue(Queue* q, Position* p){
 	if(isEmpty(q) == 1){
-		//printf("Enqueuing position (%d,%d) to empty queue\n", p->x, p->y);
 		q->anchor->link = malloc(sizeof(Link));
 		q->anchor->link->position = createPosition(p->x, p->y, 0);
 		q->anchor->link->value = valuePosition(q->heuristic, p, q->finalX, q->finalY);
@@ -121,7 +117,7 @@ void enqueue(Queue* q, Position* p){
 		int valueNew = valuePosition(q->heuristic, p, q->finalX, q->finalY);
 		
 		
-		printf("Enqueuing position (%d,%d) with turn = %d\n", p->x, p->y, p->turn);
+		// printf("Enqueuing position (%d,%d) with turn = %d\n", p->x, p->y, p->turn);
 		
 		// Iterate through list until ready to be placed.
 		Link* currentLink = q->anchor;
@@ -231,6 +227,7 @@ void attemptedEnqueue(Queue* openQueue, Queue* closedQueue, int newX, int newY, 
 		if(result1 != -1 && result2 != -1){
 			if(result2 > nextTurn && result1 > nextTurn){
 				enqueue(openQueue, createPosition(newX, newY, nextTurn));
+				printQueue(openQueue);
 			}
 		}
 		if(result1 != -1){
@@ -276,6 +273,8 @@ int knightA(int X, int Y, int finalX, int finalY, int h){
 			if(isValidLocation(newX, newY)){
 				attemptedEnqueue(q, closedQueue, newX, newY, nextTurn);
 			}
+			
+			
 		}
 	}
 }
