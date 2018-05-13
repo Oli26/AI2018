@@ -182,8 +182,7 @@ void hillClimbing() {
 /*************************************************************/
 
 void simulatedAnnealing() {
-  //printf("Implement the routine simulatedAnnealing() yourself!!\n");
-  int maxTemp = 100;
+  int maxTemp = 500;
   int temp = maxTemp;
   int iterationsMoved = 0;
   while(temp > 0){
@@ -192,7 +191,7 @@ void simulatedAnnealing() {
 	int oldPos = queens[queen];
 	int newPos = random()%8;
 	queens[queen] = newPos;
-	if(oldState < evaluateState() + temp/(maxTemp/3)){
+	if(oldState < evaluateState() + temp/(maxTemp/5)){
 		iterationsMoved++;
 		
 	}else{
