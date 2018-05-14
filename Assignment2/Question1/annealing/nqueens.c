@@ -181,23 +181,40 @@ void hillClimbing() {
 
 /*************************************************************/
 
+float timeToTempFunction(int t){
+	double time = (double)t;
+	return 5-0.0001*time;
+}
+
+
 void simulatedAnnealing() {
-  int maxTemp = 500;
-  int temp = maxTemp;
+  int optimum = (nqueens-1)*nqueens/2;
+  int time = 1;
   int iterationsMoved = 0;
-  while(temp > 0){
+  while(time < 50000 && evaluateState() != optimum){
 	int oldState = evaluateState();
 	int queen = random()%8;  
 	int oldPos = queens[queen];
 	int newPos = random()%8;
 	queens[queen] = newPos;
-	if(oldState < evaluateState() + temp/(maxTemp/5)){
+	int deltaE = evaluateState() - oldState;
+	if(deltaE >= 0){
 		iterationsMoved++;
-		
 	}else{
-	  queens[queen] = oldPos;
+		//printf("Failed deltaE of %d, temp = %f\n", deltaE, timeToTempFunction(time));
+		
+		float probability = (random() % 2) - exp(deltaE/timeToTempFunction(time));
+		//printf("probability of %f\n", probability);
+		if(probability < 0){
+			//printf("Deliberate bad move made.\n");
+			iterationsMoved++;
+		}else{
+			queens[queen] = oldPos;
+		}
 	}
-	temp = temp-1;
+	 
+	
+	time = time+1;
   }
   printf("iterations = %d\n", iterationsMoved);
 }
