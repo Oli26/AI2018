@@ -30,11 +30,11 @@ void initializeRandomGenerator() {
 void initiateQueens(int flag) {
   int q;
   for (q = 0; q < nqueens; q++) {
-    queens[q] = (flag == 0? 0 : random()%nqueens); 
+    queens[q] = (flag == 0? 0 : random()%nqueens);
   }
 }
 
-/* returns TRUE if position (row0,column0) is in 
+/* returns TRUE if position (row0,column0) is in
  * conflict with (row1,column1), otherwise FALSE.
  */
 int inConflict(int row0, int column0, int row1, int column1) {
@@ -44,7 +44,7 @@ int inConflict(int row0, int column0, int row1, int column1) {
   return FALSE; /* no conflict */
 }
 
-/* returns TRUE if position (row,col) is in 
+/* returns TRUE if position (row,col) is in
  * conflict with any other queen on the board, otherwise FALSE.
  */
 int inConflictWithAnotherQueen(int row, int col) {
@@ -59,7 +59,7 @@ int inConflictWithAnotherQueen(int row, int col) {
 
 /* print configuration on screen */
 void printState() {
-  int row, column; 
+  int row, column;
   printf("\n");
   for(row = 0; row < nqueens; row++) {
     for(column = 0; column < nqueens; column++) {
@@ -93,7 +93,7 @@ void moveQueen(int queen, int column) {
 }
 
 /* returns TRUE if queen can be moved to position
- * (queen,column). Note that this routine checks only that 
+ * (queen,column). Note that this routine checks only that
  * the values of queen and column are valid! It does not test
  * conflicts!
  */
@@ -175,7 +175,39 @@ void randomSearch() {
 /*************************************************************/
 
 void hillClimbing() {
-  printf("Implement the routine hillClimbing() yourself!!\n");
+  int iter = 0;
+  int optimum = (nqueens-1)*nqueens/2;
+
+  while (evaluateState() != optimum) {
+    if (iter == MAXITER) break;
+    int curBestH, curBestPos;
+    for (int queen=0; queen < nqueens; queen++) {
+      printf("iteration %d: evaluation=%d\n", iter++, evaluateState());
+      if (iter == MAXITER) break;
+      curBestH = evaluateState();
+      curBestPos = columnOfQueen(queen);
+      int h = 0;
+      for(int n = 0; n < nqueens; n++){
+        if (iter == MAXITER) break;
+        queens[queen] = n;
+        h = evaluateState();
+        if(h > curBestH){
+          curBestH = h;
+          curBestPos = n;
+        }
+        else if(h == curBestH){
+          int choice = 0 + random() % 2;
+          if(choice){
+            curBestPos = n;
+          }
+        }
+      }
+      queens[queen] = curBestPos;
+    }
+  }
+  printf ("Final state is");
+  printState();
+  printf("optimum=%d, evaluatestate= %d", optimum, evaluateState());
 }
 
 /*************************************************************/
@@ -198,11 +230,11 @@ int main(int argc, char *argv[]) {
     printf ("(3) Simulated Annealing: ");
     scanf ("%d", &algorithm);
   } while ((algorithm < 1) || (algorithm > 3));
-  
+
   initializeRandomGenerator();
 
   initiateQueens(1);
-  
+
   printf("\nInitial state:");
   printState();
 
@@ -212,5 +244,5 @@ int main(int argc, char *argv[]) {
   case 3: simulatedAnnealing(); break;
   }
 
-  return 0;  
+  return 0;
 }
