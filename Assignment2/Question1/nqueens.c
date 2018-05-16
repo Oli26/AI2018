@@ -212,43 +212,58 @@ void hillClimbing() {
 
 /*************************************************************/
 
-float timeToTempFunction(int t){
+double timeToTempFunction(int t){
 	double time = (double)t;
-	return 10-0.1*time;
+	return (double)pow(0.99, time/100);
 }
 
 
 void simulatedAnnealing() {
   int optimum = (nqueens-1)*nqueens/2;
-  int time = 1;
-  int iterationsMoved = 0;
-  while(time < 100 && evaluateState() != optimum){
-	int oldState = evaluateState();
-	int queen = random()%8;  
-	int oldPos = queens[queen];
-	int newPos = random()%8;
-	queens[queen] = newPos;
-	int deltaE = evaluateState() - oldState;
-	if(deltaE >= 0){
-		iterationsMoved++;
-	}else{
-		//printf("Failed deltaE of %d, temp = %f\n", deltaE, timeToTempFunction(time));
-		
-		float probability = (random() % 2) - exp(deltaE/timeToTempFunction(time));
-		//printf("probability of %f\n", probability);
-		if(probability < 0){
-			//printf("Deliberate bad move made.\n");
-			iterationsMoved++;
-		}else{
-			queens[queen] = oldPos;
-		}
+  int time = 0;
+  double temp;
+  while(evaluateState() != optimum){
+	time = time+1;
+	temp =timeToTempFunction(time);
+	if(temp == 0){
+		printf("Failed to find a solution!\n");
+		break;
 	}
+	int oldState = evaluateState();
+	int queen = random()%nqueens;  
+	int oldPos = queens[queen];
+	
+	// Get new row that is different from old row.
+	int newPos;
+	do{
+		newPos = random()%nqueens;
+	}while(newPos == oldPos);
+	
+	// MOVE QUEEN
+	moveQueen(queen, newPos);
+
+	int newState = evaluateState();
+	int deltaE = newState - oldState;
+	double randomNumber = (random()%1000000);
+	randomNumber = randomNumber/1000000.0;
+	float power= pow(2.718281,deltaE/temp);
+	
+	//printf("Iteration = %d, newState = %d\n", time, newState);
+	//printf ("iteration %d, temp = %lf, power = %lf, prob1 = %lf\n",time, temp, power, randomNumber);
+	if(!(randomNumber <= power)){
+		moveQueen(queen, oldPos);
+	}
+	
 	 
 	
-	time = time+1;
+	
   }
-  printf("iterations = %d\n", iterationsMoved);
+  printf("time = %d\n", time);
+  printf ("Final state is");
+  printState();
+  printf("optimum=%d\nevaluatestate= %d", optimum, evaluateState());
 }
+
 
 
 int main(int argc, char *argv[]) {
