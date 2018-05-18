@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX 1
-#define MIN -1
+#define MAX 0
+#define MIN 1
 
 #define INFINITY 9999999
 
@@ -13,46 +13,44 @@ typedef struct moveVal {
 
 MoveVal negamaxDecision(int state, int turn, MoveVal bestMove) {
   MoveVal m;
+  int move,moveValue;
   m = bestMove;
 
   /* terminal state */
   if (state == 1) {
-    bestMove.val = turn;
+    bestMove.val = -1;
+    //printf("%d\n",bestMove.val);
     return bestMove;
   }
 
   bestMove.val = -INFINITY;
-  for (int move = 1; move <= 3; move++){
+  for (move = 1; move <= 3; move++){
     if (state - move > 0) {
+      moveValue = -1 * negamaxDecision(state - move, turn, bestMove).val;
 
-      state = state - move;
-      m = negamaxDecision(state, turn, m);
-      // printf("%d - %d\n",state,move);
-      m.val *= -1;
-      if (m.val > bestMove.val) {
-        bestMove.val = turn;
-        bestMove.move = m.move;
+      if (moveValue > bestMove.val) {
+        bestMove.val = moveValue;
+        bestMove.move = move;
       }
     }
   }
-  // printf("%d - %s - %d - %d\n",state,(turn == MAX ? "Max" : "Min"),bestMove.move,bestMove.val);
   return bestMove;
 }
 
 void playNim(int state) {
   MoveVal temp;
-  MoveVal action;
-  int turn = 1;
+  int action;
+  int turn = 0;
 
-  action.move = 1;
-  action.val = -INFINITY;
-  temp = action;
+  temp.val = -INFINITY;
+  //temp = action;
+  //printf("%d\n",temp.val);
   while (state != 1) {
-    action = negamaxDecision(state, turn, temp);
-    printf("%d: %s takes %d (valuation: %d)\n", state, 
-           (turn == MAX ? "Max" : "Min"), action.move, action.val);
-    state = state - action.move;
-    turn *= -1;
+    action = negamaxDecision(state, turn, temp).move;
+    printf("%d: %s takes %d\n", state, 
+           (turn == MAX ? "Max" : "Min"), action);
+    state = state - action;
+    turn = 1 - turn;
   }
   printf("1: %s loses\n", (turn == MAX ? "Max" : "Min"));
 }
