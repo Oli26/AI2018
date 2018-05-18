@@ -19,7 +19,6 @@ MoveVal negamaxDecision(int state, int turn, MoveVal bestMove) {
   /* terminal state */
   if (state == 1) {
     bestMove.val = -1;
-    //printf("%d\n",bestMove.val);
     return bestMove;
   }
 
@@ -41,10 +40,7 @@ void playNim(int state) {
   MoveVal temp;
   int action;
   int turn = 0;
-
   temp.val = -INFINITY;
-  //temp = action;
-  //printf("%d\n",temp.val);
   while (state != 1) {
     action = negamaxDecision(state, turn, temp).move;
     printf("%d: %s takes %d\n", state, 

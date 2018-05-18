@@ -21,7 +21,6 @@ MoveVal negamaxDecision(int state, int turn, MoveVal bestMove) {
   /* terminal state */
   if (state == 1) {
     bestMove.val = -1;
-    //printf("%d\n",bestMove.val);
     return bestMove;
   }
 
@@ -50,8 +49,6 @@ void playNim(int state) {
   int turn = 0;
 
   temp.val = -INFINITY;
-  //temp = action;
-  //printf("%d\n",temp.val);
   while (state != 1) {
     action = negamaxDecision(state, turn, temp).move;
     printf("%d: %s takes %d\n", state, 
@@ -68,6 +65,7 @@ int main(int argc, char *argv[]) {
     fprintf(stderr, "<number of sticks> must be at least 3!\n");
     return -1;
   }
+  
   tTable = calloc((atoi(argv[1])+1),sizeof(MoveVal));
   playNim(atoi(argv[1]));
 
