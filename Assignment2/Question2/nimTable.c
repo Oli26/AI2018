@@ -11,6 +11,8 @@ typedef struct moveVal {
   int val;
 } MoveVal;
 
+MoveVal *tTable;
+
 MoveVal negamaxDecision(int state, int turn, MoveVal bestMove) {
   MoveVal m;
   int move,moveValue;
@@ -20,6 +22,10 @@ MoveVal negamaxDecision(int state, int turn, MoveVal bestMove) {
   if (state == 1) {
     bestMove.val = -1;
     return bestMove;
+  }
+
+  if (tTable[state].val != 0) {
+    return tTable[state];
   }
 
   bestMove.val = -INFINITY;
@@ -33,6 +39,7 @@ MoveVal negamaxDecision(int state, int turn, MoveVal bestMove) {
       }
     }
   }
+  tTable[state] = bestMove;
   return bestMove;
 }
 
@@ -40,6 +47,7 @@ void playNim(int state) {
   MoveVal temp;
   int action;
   int turn = 0;
+
   temp.val = -INFINITY;
   while (state != 1) {
     action = negamaxDecision(state, turn, temp).move;
@@ -57,7 +65,8 @@ int main(int argc, char *argv[]) {
     fprintf(stderr, "<number of sticks> must be at least 3!\n");
     return -1;
   }
-
+  
+  tTable = calloc((atoi(argv[1])+1),sizeof(MoveVal));
   playNim(atoi(argv[1]));
 
   return 0;
