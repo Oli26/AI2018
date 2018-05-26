@@ -174,96 +174,103 @@ void randomSearch() {
 
 /*************************************************************/
 
-void hillClimbing() {
-  int iter = 0;
-  int optimum = (nqueens-1)*nqueens/2;
 
+void hillClimbing() {
+  int queen, iter = 0, optimum = (nqueens-1)*nqueens/2,  neighbours[nqueens][nqueens], i, j, curBestH, bestH, curH;
   while (evaluateState() != optimum) {
+    printf("iteration %d: evaluation=%d\n", iter++, evaluateState());
     if (iter == MAXITER) break;
-    int curBestH, curBestPos;
-    for (int queen=0; queen < nqueens; queen++) {
-      printf("iteration %d: evaluation=%d\n", iter++, evaluateState());
-      if (iter == MAXITER) break;
-      curBestH = evaluateState();
-      curBestPos = columnOfQueen(queen);
-      int h = 0;
-      for(int n = 0; n < nqueens; n++){
-        if (iter == MAXITER) break;
-        queens[queen] = n;
-        h = evaluateState();
-        if(h > curBestH){
-          curBestH = h;
-          curBestPos = n;
-        }
-        else if(h == curBestH){
-          int choice = 0 + random() % 2;
-          if(choice){
-            curBestPos = n;
+    int amount = 0;
+    curBestH = countConflicts();
+    bestH = countConflicts();
+    for (queen=0; queen < nqueens; queen++) {
+      int initialcolumn = queens[queen];
+      for(i = 0; i < nqueens; i++){
+        if(canMoveTo(queen, i) && i != curBestH) {
+          moveQueen(queen, i);
+          curH = countConflicts();
+          if(bestH == curH) {
+            amount++;
           }
+          else if(bestH > curH) {
+            bestH = curH;
+            amount = 1;
+          }
+          neighbours[queen][i] = curH;
         }
       }
-      queens[queen] = curBestPos;
+      moveQueen(queen,initialcolumn);
     }
+    if(bestH < curBestH) {
+      int randomN = 1 + random() % amount; // as Explained in assignment
+      int row;
+      int column;
+      int cnt = 0;
+      while(cnt < randomN){
+        for(i = 0; i < nqueens; i++){
+          for(j = 0; j < nqueens; j ++){
+            if(neighbours[i][j] == bestH){
+              row = i;
+              column = j;
+              cnt++;
+              }
+            if(cnt >= randomN) break;
+          }
+          if(cnt >= randomN) break;
+        }
+      }
+      moveQueen(row, column);
+    } else {
+      printf("Found local max, no solution possible, least conflicts = %d", evaluateState());
+      break;
+    }
+  }
+  if (iter < MAXITER) {
+    printf ("Solved puzzle. ");
   }
   printf ("Final state is");
   printState();
-  printf("optimum=%d, evaluatestate= %d", optimum, evaluateState());
+  printf("optimum=%d, evaluatestate= %d, iter = %d", optimum, evaluateState(), iter);
 }
-
 /*************************************************************/
 
-double timeToTempFunction(int t){
+float timeToTempFunction(int t){
 	double time = (double)t;
-	return (double)pow(0.99, time/100);
+	return 10-0.1*time;
 }
 
 
 void simulatedAnnealing() {
   int optimum = (nqueens-1)*nqueens/2;
-  int time = 0;
-  double temp;
-  while(evaluateState() != optimum){
-	time = time+1;
-	temp =timeToTempFunction(time);
-	if(temp == 0){
-		printf("Failed to find a solution!\n");
-		break;
-	}
+  int time = 1;
+  int iterationsMoved = 0;
+  while(time < 100 && evaluateState() != optimum){
 	int oldState = evaluateState();
-	int queen = random()%nqueens;  
+	int queen = random()%8;
 	int oldPos = queens[queen];
-	
-	// Get new row that is different from old row.
-	int newPos;
-	do{
-		newPos = random()%nqueens;
-	}while(newPos == oldPos);
-	
-	// MOVE QUEEN
-	moveQueen(queen, newPos);
+	int newPos = random()%8;
+	queens[queen] = newPos;
+	int deltaE = evaluateState() - oldState;
+	if(deltaE >= 0){
+		iterationsMoved++;
+	}else{
+		//printf("Failed deltaE of %d, temp = %f\n", deltaE, timeToTempFunction(time));
 
-	int newState = evaluateState();
-	int deltaE = newState - oldState;
-	double randomNumber = (random()%1000000);
-	randomNumber = randomNumber/1000000.0;
-	float power= pow(2.718281,deltaE/temp);
-	
-	//printf("Iteration = %d, newState = %d\n", time, newState);
-	//printf ("iteration %d, temp = %lf, power = %lf, prob1 = %lf\n",time, temp, power, randomNumber);
-	if(!(randomNumber <= power)){
-		moveQueen(queen, oldPos);
+		float probability = (random() % 2) - exp(deltaE/timeToTempFunction(time));
+		//printf("probability of %f\n", probability);
+		if(probability < 0){
+			//printf("Deliberate bad move made.\n");
+			iterationsMoved++;
+		}else{
+			queens[queen] = oldPos;
+		}
 	}
-	
-	 
-	
-	
-  }
-  printf("time = %d\n", time);
-  printf ("Final state is");
-  printState();
-  printf("optimum=%d\nevaluatestate= %d", optimum, evaluateState());
-}
 
+
+	time = time+1;
+  }
+  printf("iterations = %d\n", iterationsMoved);
+}
 
 
 int main(int argc, char *argv[]) {
