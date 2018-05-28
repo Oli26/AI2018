@@ -1,0 +1,12 @@
+variables:
+X0, X1, X2 : integer;
+
+domains:
+X0, X1, X2 <- [0..250];
+
+constraints:
+X0 + X1 = 5 * X2;
+X1 + X2 = 3 * X0;
+X0 * X1 * X2 = 42;
+
+solutions:all
