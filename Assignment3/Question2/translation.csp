@@ -1,0 +1,17 @@
+variables:
+X0, X1, X2, X3, X4 : integer;
+
+domains:
+X0, X1, X2, X3, X4 <- [0..4];
+
+constraints:
+X1 >= X0;
+X0 > X3;
+X2 <> X0;
+X1 <> X2;
+X2 <> X3 + 1;
+X2 <> X3;
+X2 > X4;
+X3 > X4;
+
+solutions:all
