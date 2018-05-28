@@ -2,443 +2,81 @@ Accepted
 
 ####################################################
 
-# Before init: 25 possible values and 1 * 5^5 combinations
+# Before init: 10 possible values and 1 * 2^5 combinations
 # Applying substitution for single-value domains 	  and checking applicable constraints:
-# After init: 25 possible values and 1 * 5^5 combinations
+# After init: 10 possible values and 1 * 2^5 combinations
 # After init: domains
-X0: [0, 1, 2, 3, 4]
-X1: [0, 1, 2, 3, 4]
-X2: [0, 1, 2, 3, 4]
-X3: [0, 1, 2, 3, 4]
-X4: [0, 1, 2, 3, 4]
+X0: [0, 1]
+X1: [0, 1]
+X2: [0, 1]
+X3: [0, 1]
+X4: [0, 1]
 Trying value 0 for variable X4.
+Maintaining arc consistency after assignment of variable X4
 Trying value 0 for variable X3.
+Maintaining arc consistency after assignment of variable X3
+X3 = 0 -> Domain limited of variable X1.
+Trying value 1 for variable X1.
+Maintaining arc consistency after assignment of variable X1
+Trying value 0 for variable X2.
+Maintaining arc consistency after assignment of variable X2
+Trying value 0 for variable X0.
+Maintaining arc consistency after assignment of variable X0
+Trying value 1 for variable X0.
+Maintaining arc consistency after assignment of variable X0
+Trying value 1 for variable X2.
+Maintaining arc consistency after assignment of variable X2
+X2 = 1 -> Domain limited of variable X0.
+Trying value 1 for variable X0.
+Maintaining arc consistency after assignment of variable X0
 Trying value 1 for variable X3.
-Trying value 0 for variable X2.
+Maintaining arc consistency after assignment of variable X3
+X3 = 1 -> Domain limited of variable X0.
+X3 = 1 -> Domain limited of variable X1.
+X3 = 1 -> Domain limited of variable X2.
+Trying value 1 for variable X0.
+Maintaining arc consistency after assignment of variable X0
+Trying value 0 for variable X1.
+Maintaining arc consistency after assignment of variable X1
 Trying value 1 for variable X2.
-Trying value 2 for variable X2.
-Trying value 3 for variable X2.
-Trying value 0 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 1 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X1.
-Trying value 4 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X2.
-Trying value 0 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 1 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X1.
-Trying value 2 for variable X3.
-Trying value 0 for variable X2.
-Trying value 1 for variable X2.
-Trying value 0 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 1 for variable X1.
-Trying value 2 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X2.
-Trying value 3 for variable X2.
-Trying value 4 for variable X2.
-Trying value 0 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 1 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X1.
-Trying value 3 for variable X3.
-Trying value 0 for variable X2.
-Trying value 1 for variable X2.
-Trying value 0 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 1 for variable X1.
-Trying value 2 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X2.
-Trying value 0 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 1 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X1.
-Trying value 3 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X2.
-Trying value 4 for variable X2.
-Trying value 4 for variable X3.
-Trying value 0 for variable X2.
-Trying value 1 for variable X2.
-Trying value 0 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 1 for variable X1.
-Trying value 2 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X2.
-Trying value 0 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 1 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X1.
-Trying value 3 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X2.
-Trying value 0 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 1 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X1.
-Trying value 4 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X2.
+Maintaining arc consistency after assignment of variable X2
 Trying value 1 for variable X4.
+Maintaining arc consistency after assignment of variable X4
 Trying value 0 for variable X3.
+Maintaining arc consistency after assignment of variable X3
+X3 = 0 -> Domain limited of variable X2.
+Trying value 0 for variable X2.
+Maintaining arc consistency after assignment of variable X2
+Trying value 0 for variable X1.
+Maintaining arc consistency after assignment of variable X1
+Trying value 0 for variable X0.
+Maintaining arc consistency after assignment of variable X0
+Trying value 1 for variable X0.
+Maintaining arc consistency after assignment of variable X0
+Trying value 1 for variable X1.
+Maintaining arc consistency after assignment of variable X1
+X1 = 1 -> Domain limited of variable X0.
+Trying value 1 for variable X0.
+Maintaining arc consistency after assignment of variable X0
 Trying value 1 for variable X3.
-Trying value 2 for variable X3.
+Maintaining arc consistency after assignment of variable X3
 Trying value 0 for variable X2.
-Trying value 1 for variable X2.
-Trying value 2 for variable X2.
-Trying value 3 for variable X2.
-Trying value 4 for variable X2.
+Maintaining arc consistency after assignment of variable X2
+X2 = 0 -> Domain limited of variable X0.
+X2 = 0 -> Domain limited of variable X1.
+Trying value 0 for variable X0.
+Maintaining arc consistency after assignment of variable X0
 Trying value 0 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 1 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X1.
-Trying value 3 for variable X3.
-Trying value 0 for variable X2.
+Maintaining arc consistency after assignment of variable X1
 Trying value 1 for variable X2.
-Trying value 2 for variable X2.
+Maintaining arc consistency after assignment of variable X2
 Trying value 0 for variable X1.
-Trying value 0 for variable X0.
+Maintaining arc consistency after assignment of variable X1
+X1 = 0 -> Domain limited of variable X0.
 Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
+Maintaining arc consistency after assignment of variable X0
 Trying value 1 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X1.
-Trying value 3 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X2.
-Trying value 4 for variable X2.
-Trying value 4 for variable X3.
-Trying value 0 for variable X2.
-Trying value 1 for variable X2.
-Trying value 2 for variable X2.
-Trying value 0 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 1 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X1.
-Trying value 3 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X2.
-Trying value 0 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 1 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X1.
-Trying value 4 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X2.
-Trying value 2 for variable X4.
-Trying value 0 for variable X3.
-Trying value 1 for variable X3.
-Trying value 2 for variable X3.
-Trying value 3 for variable X3.
-Trying value 0 for variable X2.
-Trying value 1 for variable X2.
-Trying value 2 for variable X2.
-Trying value 3 for variable X2.
-Trying value 4 for variable X2.
-Trying value 4 for variable X3.
-Trying value 0 for variable X2.
-Trying value 1 for variable X2.
-Trying value 2 for variable X2.
-Trying value 3 for variable X2.
-Trying value 0 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 1 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 2 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 3 for variable X1.
-Trying value 4 for variable X1.
-Trying value 0 for variable X0.
-Trying value 1 for variable X0.
-Trying value 2 for variable X0.
-Trying value 3 for variable X0.
-Trying value 4 for variable X0.
-Trying value 4 for variable X2.
-Trying value 3 for variable X4.
-Trying value 0 for variable X3.
-Trying value 1 for variable X3.
-Trying value 2 for variable X3.
-Trying value 3 for variable X3.
-Trying value 4 for variable X3.
-Trying value 0 for variable X2.
-Trying value 1 for variable X2.
-Trying value 2 for variable X2.
-Trying value 3 for variable X2.
-Trying value 4 for variable X2.
-Trying value 4 for variable X4.
-Trying value 0 for variable X3.
-Trying value 1 for variable X3.
-Trying value 2 for variable X3.
-Trying value 3 for variable X3.
-Trying value 4 for variable X3.
-backtracking points: 100
+Maintaining arc consistency after assignment of variable X1
+X1 = 1 -> Domain limited of variable X0.
+X1 = 1 -> Domain limited of variable X0.
+backtracking points: 28

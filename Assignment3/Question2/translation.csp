@@ -2,16 +2,16 @@ variables:
 X0, X1, X2, X3, X4 : integer;
 
 domains:
-X0, X1, X2, X3, X4 <- [0..4];
+X0, X1, X2, X3, X4 <- [0..0, 1..1];
 
 constraints:
-X1 >= X0;
-X0 > X3;
-X2 <> X0;
-X1 <> X2;
-X2 <> X3 + 1;
-X2 <> X3;
-X2 > X4;
-X3 > X4;
+max(max(X0,X1),1 - X2);
+max(max(1 - X0,1 - X1),1 - X3);
+max(max(X0,1 - X1),1 - X4);
+max(max(1 - X0,X2),1 - X3);
+max(max(X0,1 - X2),X4);
+max(max(X0,1 - X3),X4);
+max(max(X1,X3),X4);
+max(max(1 - X2,X3),1 - X4);
 
 solutions:all

@@ -1,0 +1,19 @@
+# sat.csp
+# AI1 Lab 3a
+# Authors: Nik Dijkema, Oliver Holder, William Laarakkers
+# Date: 28/05/2018
+
+variables:
+  A,B,C,D,E : integer;
+domains:
+  A,B,C,D,E  <- [0,1];
+constraints:	
+  max(max(A,B),1-C);
+  max(max(1-A,1-B),1-D);
+  max(max(A,1-B),1-E);
+  max(max(1-A,C),1-D);
+  max(max(A,1-C),E);
+  max(max(A,1-D),E);
+  max(max(B,D),E);
+  max(max(1-C,D),1-E);
+solutions: all
