@@ -387,10 +387,11 @@ int checkAllModels(int modelSize) {
       temp = temp /2;
 
     }
-    for (int j = 0; j < modelSize; j++) {
-      model[j] = binary / (int)(pow(10,j));
-    }
     printf("%d", binary);
+    for (int j = 0; j < modelSize; j++) {
+      model[j] = binary % 10;
+      binary = binary / 10;
+    }
     showModel(modelSize);
 
     if ((evaluateExpressionSet(kbSize, kb))) {
